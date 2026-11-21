@@ -99,12 +99,11 @@ export function stageShot(name, state, seed) {
     player.x = g.x + Math.cos(g.angle) * 120;
     player.y = g.y + Math.sin(g.angle) * 120;
     player.sneaking = false;
-    // Stand still and be seen: the guard's alert fills and it gives chase.
-    const steps = Math.floor(2.2 / STEP);
+    // Stand still and be seen: the guard's alert fills fast at close range and it
+    // gives chase. Capture the frame while it is still alarmed, before it can decay.
+    const steps = Math.floor(1.2 / STEP);
     for (let i = 0; i < steps; i += 1) stepAll(state, STEP);
-    // Then run a little, so the frame shows the chase in motion.
-    runTo(state, 0.5, level.exit, 0);
-    state.time = 2.7;
+    state.time = 1.2;
     return { screen: SCREEN_PLAY };
   }
   if (name === 'escape') {
