@@ -120,8 +120,9 @@ export function conePolygon(solids, gx, gy, angle, halfAngle, range) {
 
 /** True when the point (x, y) is inside any shadow patch of the level. */
 export function inShadow(level, x, y) {
-  for (let i = 0; i < level.shadows.length; i += 1) {
-    const s = level.shadows[i];
+  const shadows = level.def ? level.def.shadows : level.shadows;
+  for (let i = 0; i < shadows.length; i += 1) {
+    const s = shadows[i];
     if (x >= s.x && x <= s.x + s.w && y >= s.y && y <= s.y + s.h) return true;
   }
   return false;

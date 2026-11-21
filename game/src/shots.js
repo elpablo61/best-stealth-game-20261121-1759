@@ -104,6 +104,7 @@ export function stageShot(name, state, seed) {
     for (let i = 0; i < steps; i += 1) stepAll(state, STEP);
     // Then run a little, so the frame shows the chase in motion.
     runTo(state, 0.5, level.exit, 0);
+    state.time = 2.7;
     return { screen: SCREEN_PLAY };
   }
   if (name === 'escape') {
@@ -111,6 +112,7 @@ export function stageShot(name, state, seed) {
     player.x = level.exit.x - 60;
     player.y = level.exit.y + 30;
     runTo(state, 1.2, { x: level.exit.x + 23, y: level.exit.y + 30 }, 0);
+    state.time = 1.2;
     return { screen: SCREEN_PLAY };
   }
   if (name === 'patrol') {
@@ -121,9 +123,11 @@ export function stageShot(name, state, seed) {
       player.sneaking = true;
       stepAll(state, STEP);
     }
+    state.time = 7.5;
     return { screen: SCREEN_PLAY };
   }
   // cover (default): sneak toward the relic for a while, mid-level, cones out.
   runTo(state, 9, level.relic, 8);
+  state.time = 9;
   return { screen: SCREEN_PLAY };
 }
